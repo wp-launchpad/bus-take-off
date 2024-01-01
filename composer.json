@@ -1,0 +1,23 @@
+{
+  "name": "wp-launchpad/bus-take-off",
+  "description": "Initialisation library for the bus library from the Launchpad framework",
+  "require": {
+    "wp-launchpad/cli": "^1.0.1",
+    "ext-mbstring": "*",
+    "ext-json": "*",
+    "composer/composer": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "LaunchpadBusTakeOff\\": "inc/"
+    }
+  },
+  "extra": {
+    "launchpad": {
+      "provider" : "LaunchpadBus\\ServiceProvider",
+      "libraries": {
+        "wp-launchpad/bus": "^1.0"
+      }
+    }
+  }
+}
