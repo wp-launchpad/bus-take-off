@@ -7,9 +7,20 @@
     "ext-json": "*",
     "composer/composer": "^2.5"
   },
+  "require-dev": {
+    "brain/monkey": "^2.0",
+    "phpunit/phpunit": "^7.5 || ^8 || ^9",
+    "wp-media/phpunit": "^3.0",
+    "mikey179/vfsstream": "^1.6"
+  },
   "autoload": {
     "psr-4": {
       "LaunchpadBusTakeOff\\": "inc/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "LaunchpadBusTakeOff\\Tests\\": "tests/"
     }
   },
   "extra": {

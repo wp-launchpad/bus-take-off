@@ -67,13 +67,21 @@ class MakeCommandCommand extends Command
     {
         $io = $this->app()->io();
 
+        $pathclass = dirname($name);
+
+        $basename = basename($name);
+
         $classes = [
             'commands/command.php.tpl' => "$name",
-            'commands/command_handler.php.tpl' => "{$name}Handler",
+            'commands/command_handler.php.tpl' => "{$pathclass}/CommandHandlers/{$basename}Handler",
         ];
 
         foreach ($classes as $class => $classname) {
-            $path = $this->class_generator->generate($class, $name, [], true);
+            $path = $this->class_generator->generate($class, $classname, [
+                'root_namespace' => $this->configurations->getBaseNamespace(),
+                'base_namespace' => str_replace('/', '\\', $pathclass),
+                'name' => $basename,
+            ]);
 
             if( ! $path ) {
                 $io->write("The class $classname already exists", true);

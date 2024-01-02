@@ -67,14 +67,22 @@ class MakeQueryCommand extends Command
     {
         $io = $this->app()->io();
 
+        $pathclass = dirname($name);
+
+        $basename = basename($name);
+
         $classes = [
             'queries/query.php.tpl' => "$name",
-            'queries/query_handler.php.tpl' => "{$name}Handler",
-            'queries/query_result.php.tpl' => "{$name}Result",
+            'queries/query_handler.php.tpl' => "{$pathclass}/QueryHandlers/{$basename}Handler",
+            'queries/query_result.php.tpl' => "{$pathclass}/QueryResults/{$basename}Result",
         ];
 
         foreach ($classes as $class => $classname) {
-            $path = $this->class_generator->generate($class, $name, [], true);
+            $path = $this->class_generator->generate($class, $classname, [
+                'root_namespace' => $this->configurations->getBaseNamespace(),
+                'base_namespace' => str_replace('/', '\\', $pathclass),
+                'name' => $basename,
+            ]);
 
             if( ! $path ) {
                 $io->write("The class $classname already exists", true);

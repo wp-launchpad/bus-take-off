@@ -3,9 +3,13 @@
 namespace LaunchpadBusTakeOff;
 
 
+use LaunchpadBusTakeOff\Commands\MakeCommandCommand;
+use LaunchpadBusTakeOff\Commands\MakeQueryCommand;
 use LaunchpadCLI\App;
 use LaunchpadCLI\Entities\Configurations;
 use LaunchpadCLI\ServiceProviders\ServiceProviderInterface;
+use LaunchpadCLI\Services\ClassGenerator;
+use LaunchpadCLI\Templating\Renderer;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 
@@ -35,6 +39,11 @@ class ServiceProvider implements ServiceProviderInterface
     protected $configs;
 
     /**
+     * @var Renderer
+     */
+    protected $renderer;
+
+    /**
      * Instantiate the class.
      *
      * @param Configurations $configs configuration from the project.
@@ -54,10 +63,18 @@ class ServiceProvider implements ServiceProviderInterface
         // The FilesystemOperator
         $this->app_filesystem = new Filesystem($adapter);
 
+        $this->renderer = new Renderer($this->app_filesystem, '/templates/');
+
+
     }
 
     public function attach_commands(App $app): App
     {
-        // TODO: Implement attach_commands() method.
+        $class_generator = new ClassGenerator($this->filesystem, $this->renderer, $this->configs);
+
+        $app->add(new MakeQueryCommand($class_generator, $this->filesystem, $this->configs));
+        $app->add(new MakeCommandCommand($class_generator, $this->filesystem, $this->configs));
+
+        return $app;
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace ;
+namespace {{ base_namespace }};
 
-use {{ }}\LaunchpadBus\Bus\Commands\CommandHandlerInterface;
-use {{ }}\CommandHandlerInterface;
+use {{ root_namespace }}LaunchpadBus\Bus\Commands\CommandHandlerInterface;
+use {{ base_namespace }}\{{ name }};
 
-class {{  }} implements CommandHandlerInterface {
-    public function handle({{  }} $command): void
+class {{ name }}Handler implements CommandHandlerInterface {
+    public function handle({{ name }} $command): void
     {
 
     }

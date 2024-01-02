@@ -1,9 +1,9 @@
 <?php
 
-namespace ;
+namespace {{ base_namespace }};
 
-use {{ }}\LaunchpadBus\Bus\Commands\CommandHandlerInterface;
+use {{ root_namespace }}LaunchpadBus\Bus\Commands\CommandHandlerInterface;
 
-class {{  }} implements CommandInterface {
+class {{ name }} implements CommandInterface {
 
 }
