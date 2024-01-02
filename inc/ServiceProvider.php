@@ -3,8 +3,10 @@
 namespace LaunchpadBusTakeOff;
 
 
+use LaunchpadBusTakeOff\Commands\InstallCommand;
 use LaunchpadBusTakeOff\Commands\MakeCommandCommand;
 use LaunchpadBusTakeOff\Commands\MakeQueryCommand;
+use LaunchpadBusTakeOff\Services\ConfigsManager;
 use LaunchpadCLI\App;
 use LaunchpadCLI\Entities\Configurations;
 use LaunchpadCLI\ServiceProviders\ServiceProviderInterface;
@@ -71,6 +73,12 @@ class ServiceProvider implements ServiceProviderInterface
     public function attach_commands(App $app): App
     {
         $class_generator = new ClassGenerator($this->filesystem, $this->renderer, $this->configs);
+
+        $configs_manager = new ConfigsManager($this->filesystem, $this->configs);
+
+        if( ! $configs_manager->has_provider()) {
+            $app->add(new InstallCommand($configs_manager));
+        }
 
         $app->add(new MakeQueryCommand($class_generator, $this->filesystem, $this->configs));
         $app->add(new MakeCommandCommand($class_generator, $this->filesystem, $this->configs));
