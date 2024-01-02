@@ -11,7 +11,8 @@
     "brain/monkey": "^2.0",
     "phpunit/phpunit": "^7.5 || ^8 || ^9",
     "wp-media/phpunit": "^3.0",
-    "mikey179/vfsstream": "^1.6"
+    "mikey179/vfsstream": "^1.6",
+    "wp-launchpad/bus": "^1.0"
   },
   "autoload": {
     "psr-4": {
@@ -25,7 +26,9 @@
   },
   "extra": {
     "launchpad": {
-      "provider" : "LaunchpadBus\\ServiceProvider",
+      "provider" : "LaunchpadBusTakeOff\\ServiceProvider",
+      "command": "bus:install",
+      "install": true,
       "libraries": {
         "wp-launchpad/bus": "^1.0"
       }
