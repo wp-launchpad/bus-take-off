@@ -12,7 +12,7 @@
     "phpunit/phpunit": "^7.5 || ^8 || ^9",
     "wp-media/phpunit": "^3.0",
     "mikey179/vfsstream": "^1.6",
-    "wp-launchpad/bus": "^1.0"
+    "wp-launchpad/bus": "^2.0"
   },
   "autoload": {
     "psr-4": {
@@ -30,7 +30,7 @@
       "command": "bus:install",
       "install": true,
       "libraries": {
-        "wp-launchpad/bus": "^1.0"
+        "wp-launchpad/bus": "^2.0"
       }
     }
   }
