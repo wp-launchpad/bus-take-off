@@ -3,7 +3,7 @@ A command bus for the Launchpad framework.
 
 ## Install
 Just run the following command:
-```composer require wp-launchpad/bus --dev```
+```composer require wp-launchpad/bus-take-off --dev```
 
 ## Usage
 
